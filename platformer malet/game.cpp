@@ -507,14 +507,13 @@ void Game::update()
 	{
 		player_pos_ = sf::Vector2f(2500, 700);
 		you_win = true;
-		if (you_win_musik == 0 )
-		{
-			sound_main_s.stop();
-			sound_you_win_s.play();
-			you_win_musik = 1;
-		}
+		
 	}
 
+	if (cheat_code1 && cheat_code2 && cheat_code3 && cheat_code4)
+	{
+		you_win = true;
+	}
 
 	const sf::Vector2i player_coords = tilemap_.PosToCoords(player_pos_);
 	constexpr int margin = 1;
@@ -548,6 +547,54 @@ void Game::update()
 	
 		levelediting = !levelediting;
 	}
+
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num1)) 
+	{
+		cheat_code1 = true;
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num5))
+	{
+		if (cheat_code1)
+		{
+			cheat_code2 = true;
+		}
+		else
+		{
+			cheat_code1 = false;
+		}
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num0))
+	{
+		if (cheat_code1)
+		{
+			cheat_code3 = true;
+		}
+		else
+		{
+			cheat_code1 = false;
+			cheat_code2 = false;
+		}
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num9))
+	{
+		if (cheat_code1)
+		{
+			cheat_code4 = true;
+		}
+		else
+		{
+			cheat_code1 = false;
+			cheat_code2 = false;
+			cheat_code3 = false;
+		}
+	}
+
+
+	
 
 	// Cancel vertical velocity if grounded
 	if (grounded) {
@@ -846,7 +893,12 @@ void Game::update()
 	{
 		you_win_s.setPosition(player_pos_);
 		window_.draw(you_win_s);
-
+		if (you_win_musik == 0)
+		{
+			sound_main_s.stop();
+			sound_you_win_s.play();
+			you_win_musik = 1;
+		}
 	}
 
 	if (you_lose)

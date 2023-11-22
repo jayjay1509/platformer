@@ -19,6 +19,10 @@ public:
 	bool you_win = false;
 	bool you_lose = false;
 	bool coin = false;
+	bool cheat_code1 = false;
+	bool cheat_code2 = false;
+	bool cheat_code3 = false;
+	bool cheat_code4 = false;
 	int coin_musik = 0;
 	int cheakpoint_musik = 0;
 	int you_dead_musik = 0;
